@@ -124,7 +124,7 @@ func (ctx *Context) QueryArray(key string, def []string) []string {
 }
 
 func (ctx *Context) FormAll() map[string][]string {
-	if ctx.request != nil{
+	if ctx.request != nil {
 		return map[string][]string(ctx.request.PostForm)
 	}
 	return map[string][]string{}
@@ -132,7 +132,7 @@ func (ctx *Context) FormAll() map[string][]string {
 
 func (ctx *Context) FormInt(key string, def int) int {
 	params := ctx.FormAll()
-	if values,ok := params[key];ok{
+	if values, ok := params[key]; ok {
 		len := len(values)
 		if len > 0 {
 			intVal, err := strconv.Atoi(values[len-1])
@@ -144,7 +144,6 @@ func (ctx *Context) FormInt(key string, def int) int {
 	}
 	return def
 }
-
 
 func (ctx *Context) FormString(key string, def string) string {
 	params := ctx.FormAll()
@@ -166,45 +165,42 @@ func (ctx *Context) FormArray(key string, def []string) []string {
 	return def
 }
 func (ctx *Context) BindJson(obj interface{}) error {
-	if ctx.request != nil{
-		body ,err := ioutil.ReadAll(ctx.request.Body)
-		if err != nil{
+	if ctx.request != nil {
+		body, err := ioutil.ReadAll(ctx.request.Body)
+		if err != nil {
 			return err
 		}
 		ctx.request.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 
-		err = json.Unmarshal(body,obj)
-		if err != nil{
+		err = json.Unmarshal(body, obj)
+		if err != nil {
 			return err
 		}
-	}else {
+	} else {
 		return errors.New("ctx.request empty")
 	}
 	return nil
 }
 
-
 //end
 
-func (ctx *Context) Json (status int ,obj interface{}) error {
-	if ctx.HasTimeout(){
+func (ctx *Context) Json(status int, obj interface{}) error {
+	if ctx.HasTimeout() {
 		return nil
 	}
-	ctx.responseWriter.Header().Set("Content-Type","application/json")
+	ctx.responseWriter.Header().Set("Content-Type", "application/json")
 	ctx.responseWriter.WriteHeader(status)
-	byt,err := json.Marshal(obj)
-	if err != nil{
+	byt, err := json.Marshal(obj)
+	if err != nil {
 		ctx.responseWriter.WriteHeader(500)
 		return err
 	}
 	ctx.responseWriter.Write(byt)
 	return nil
 }
-func (ctx *Context) HTML(status int,obj interface{},template string) error  {
+func (ctx *Context) HTML(status int, obj interface{}, template string) error {
 	return nil
 }
-func (ctx *Context) Text(status int,obj string) error {
+func (ctx *Context) Text(status int, obj string) error {
 	return nil
 }
-
-
