@@ -16,7 +16,7 @@ type Context struct {
 	request        *http.Request
 	responseWriter http.ResponseWriter
 	ctx            context.Context
-
+	handler	ControllerHandler
 	//time out
 	hasTimeout bool
 
