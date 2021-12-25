@@ -3,11 +3,12 @@ package main
 import (
 	"fmt"
 	"github.com/Qianjiachen55/Nwfw55/framework"
+	"time"
 )
 
 func registerRouter(core *framework.Core)  {
 	fmt.Println("register")
-	core.Get("/user/login",UserLoginController)
+	core.Get("/user/login",framework.TimeoutHandler(UserLoginController,time.Second))
 
 
 	subjectApi := core.Group("/subject")
