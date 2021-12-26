@@ -3,19 +3,19 @@ package main
 import (
 	"fmt"
 	"github.com/Qianjiachen55/Nwfw55/framework"
-	"time"
+	"github.com/Qianjiachen55/Nwfw55/framework/middleware"
 )
 
 func registerRouter(core *framework.Core)  {
 	fmt.Println("register")
-	core.Get("/user/login",framework.TimeoutHandler(UserLoginController,time.Second))
+	core.Get("/user/login",middleware.Test3(),UserLoginController)
 
 
 	subjectApi := core.Group("/subject")
 	{
 		subjectApi.Delete("/:id",SubjectDelController)
 		subjectApi.Put("/:id",SubjectUpdateController)
-		subjectApi.Get("/:id",SubjectGetController)
+		subjectApi.Get("/:id",middleware.Test3(),SubjectGetController)
 		subjectApi.Get("/list/all",SubjectListController)
 
 		subjectInnerApi := subjectApi.Group("/info")

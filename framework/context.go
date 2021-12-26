@@ -16,7 +16,11 @@ type Context struct {
 	request        *http.Request
 	responseWriter http.ResponseWriter
 	ctx            context.Context
-	handler	ControllerHandler
+
+	// handler 链条
+	handlers []ControllerHandler
+	index    int
+
 	//time out
 	hasTimeout bool
 
@@ -30,6 +34,7 @@ func NewContext(r *http.Request, w http.ResponseWriter) *Context {
 		responseWriter: w,
 		ctx:            r.Context(),
 		writerMux:      &sync.Mutex{},
+		index:          -1,
 	}
 
 }
@@ -54,6 +59,22 @@ func (ctx *Context) SetHasTimeout() {
 
 func (ctx *Context) HasTimeout() bool {
 	return ctx.hasTimeout
+}
+
+func (ctx *Context) SetHandlers (handlers []ControllerHandler) {
+	ctx.handlers = handlers
+}
+
+// Next
+
+func (ctx *Context) Next() error {
+	ctx.index++
+	if ctx.index < len(ctx.handlers) {
+		if err := ctx.handlers[ctx.index](ctx); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // context 标准context接口
