@@ -28,7 +28,8 @@ func FooControllerHandler(ctx *framework.Context)  error{
 		}()
 
 		time.Sleep(10 * time.Second)
-		ctx.Json(200,"ok")
+
+		ctx.SetOkStatus().Json("ok")
 
 		finish <- struct{}{}
 	}()
@@ -43,7 +44,7 @@ func FooControllerHandler(ctx *framework.Context)  error{
 		defer ctx.WriterMux().Unlock()
 
 		log.Println(p)
-		ctx.Json(500,"panic!")
+		ctx.SetStatus(500).Json("panic!")
 	case <- finish:
 		//正常处理结束
 		fmt.Println("finish")
@@ -51,7 +52,7 @@ func FooControllerHandler(ctx *framework.Context)  error{
 		//超时
 		ctx.WriterMux().Lock()
 		defer ctx.WriterMux().Unlock()
-		ctx.Json(500,"time out")
+		ctx.SetStatus(500).Json("time out")
 		ctx.SetHasTimeout()
 	}
 	return nil

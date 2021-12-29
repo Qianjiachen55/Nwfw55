@@ -1,10 +1,16 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/Qianjiachen55/Nwfw55/framework"
 	"github.com/Qianjiachen55/Nwfw55/framework/middleware"
+	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 )
 
 func main()  {
@@ -21,6 +27,24 @@ func main()  {
 		Addr:              ":8888",
 		Handler:          	core,
 	}
-	server.ListenAndServe()
+
+	go func() {
+		server.ListenAndServe()
+	}()
+
+	quit := make(chan os.Signal)
+
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM,syscall.SIGQUIT)
+
+	<- quit
+
+	timeoutCtx,cancel := context.WithTimeout(context.Background(), 5*time.Second)
+
+	defer cancel()
+
+	if err := server.Shutdown(timeoutCtx);err != nil{
+		log.Fatal("Server Shutdown:", err)
+	}
+
 
 }
