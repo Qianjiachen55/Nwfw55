@@ -2,35 +2,32 @@ package middleware
 
 import (
 	"fmt"
-	"github.com/Qianjiachen55/Nwfw55/framework"
+	"github.com/Qianjiachen55/Nwfw55/framework/gin"
 )
 
-func Test1() framework.ControllerHandler  {
+func Test1() gin.HandlerFunc  {
 
 
-	return func(c *framework.Context) error {
+	return func(c *gin.Context)  {
 		fmt.Println("pre test1")
 		c.Next()
 		fmt.Println("post test1")
-		return nil
 	}
 }
 
-func Test2() framework.ControllerHandler {
+func Test2() gin.HandlerFunc {
 
-	return func(c *framework.Context) error {
+	return func(c *gin.Context)  {
 		fmt.Println("pre test2")
 		c.Next()
 		fmt.Println("post test2")
-		return nil
 	}
 }
 
-func Test3() framework.ControllerHandler {
-	return func(c *framework.Context) error {
+func Test3() gin.HandlerFunc {
+	return func(c *gin.Context)  {
 		fmt.Println("pre test3")
 		c.Next()
 		fmt.Println("post test3")
-		return nil
 	}
 }

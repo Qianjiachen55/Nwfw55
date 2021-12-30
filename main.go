@@ -3,8 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/Qianjiachen55/Nwfw55/framework"
-	"github.com/Qianjiachen55/Nwfw55/framework/middleware"
+	"github.com/Qianjiachen55/Nwfw55/framework/gin"
 	"log"
 	"net/http"
 	"os"
@@ -15,10 +14,10 @@ import (
 
 func main()  {
 	fmt.Println("begin!!")
-	core := framework.NewCore()
+	core := gin.New()
 	core.Use(
-		middleware.Test1(),
-		middleware.Test2())
+		gin.Recovery(),
+		)
 
 
 	registerRouter(core)

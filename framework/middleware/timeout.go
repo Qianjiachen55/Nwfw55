@@ -3,13 +3,13 @@ package middleware
 import (
 	"context"
 	"fmt"
-	"github.com/Qianjiachen55/Nwfw55/framework"
+	"github.com/Qianjiachen55/Nwfw55/framework/gin"
 	"log"
 	"time"
 )
 
-func Timeout(d time.Duration) framework.ControllerHandler {
-	return func(c *framework.Context) error {
+func Timeout(d time.Duration) gin.HandlerFunc {
+	return func(c *gin.Context)  {
 		finish := make(chan struct{},1)
 		panicChan := make(chan interface{},1)
 
@@ -30,15 +30,13 @@ func Timeout(d time.Duration) framework.ControllerHandler {
 
 		select {
 		case p := <-panicChan:
-			c.SetStatus(500).Json("time out")
+			c.ISetStatus(500).IJson("time out")
 			log.Println(p)
 		case <- finish:
 			fmt.Println("finish")
 		case <-durationCtx.Done():
-			c.SetHasTimeout()
-			c.SetStatus(500).Json("time out")
+			c.ISetStatus(500).IJson("time out")
 
 		}
-		return nil
 	}
 }

@@ -1,16 +1,15 @@
 package main
 
 import (
-	"github.com/Qianjiachen55/Nwfw55/framework"
+	"github.com/Qianjiachen55/Nwfw55/framework/gin"
 	"time"
 )
 
-func UserLoginController(c *framework.Context) error {
-	foo,_ := c.QueryString("foo","def")
+func UserLoginController(c *gin.Context) {
+	foo,_ := c.DefaultQueryString("foo","def")
 
 	time.Sleep(10*time.Second)
 
-	c.SetOkStatus().Json("ok,foo: "+foo)
+	c.ISetOkStatus().IJson("ok,foo: "+foo)
 
-	return nil
 }

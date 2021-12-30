@@ -19,9 +19,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gin-contrib/sse"
 	"github.com/Qianjiachen55/Nwfw55/framework/gin/binding"
 	"github.com/Qianjiachen55/Nwfw55/framework/gin/render"
+	"github.com/gin-contrib/sse"
 )
 
 // Content-Type MIME of the most common data formats.

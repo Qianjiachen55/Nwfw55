@@ -1,36 +1,32 @@
 package main
 
-import "github.com/Qianjiachen55/Nwfw55/framework"
+import (
+	"github.com/Qianjiachen55/Nwfw55/framework/gin"
+)
 
-func SubjectAddController(c *framework.Context) error{
-	c.SetOkStatus().Json("ok, SubjectAddController")
-	return nil
+func SubjectAddController(c *gin.Context) {
+	c.ISetOkStatus().IJson("ok, SubjectAddController")
 }
 
 
-func SubjectListController(c *framework.Context) error{
-	c.SetOkStatus().Json(" SubjectListController")
-	return nil
+func SubjectListController(c *gin.Context) {
+	c.ISetOkStatus().IJson(" SubjectListController")
 }
 
 
 
-func SubjectDelController(c *framework.Context) error {
-	c.SetOkStatus().Json(" SubjectDelController")
-	return nil
+func SubjectDelController(c *gin.Context)  {
+	c.ISetOkStatus().IJson(" SubjectDelController")
 }
 
-func SubjectUpdateController(c *framework.Context) error {
-	c.SetOkStatus().Json(" SubjectUpdateController")
-	return nil
+func SubjectUpdateController(c *gin.Context)  {
+	c.ISetOkStatus().IJson(" SubjectUpdateController")
 }
 
-func SubjectGetController(c *framework.Context) error {
-	c.SetOkStatus().Json(" SubjectGetController")
-	return nil
+func SubjectGetController(c *gin.Context)  {
+	c.ISetOkStatus().IJson(" SubjectGetController")
 }
 
-func SubjectNameController(c *framework.Context) error {
-	c.SetOkStatus().Json(" SubjectNameController")
-	return nil
+func SubjectNameController(c *gin.Context)  {
+	c.ISetOkStatus().IJson(" SubjectNameController")
 }
