@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Qianjiachen55/Nwfw55/framework/gin"
+	"github.com/Qianjiachen55/Nwfw55/provider/demo"
 )
 
 func SubjectAddController(c *gin.Context) {
@@ -10,7 +11,11 @@ func SubjectAddController(c *gin.Context) {
 
 
 func SubjectListController(c *gin.Context) {
-	c.ISetOkStatus().IJson(" SubjectListController")
+	demoService := c.MustMake(demo.Key).(demo.Service)
+
+	foo := demoService.GetFoo()
+
+	c.ISetOkStatus().IJson(foo)
 }
 
 

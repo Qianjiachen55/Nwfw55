@@ -16,7 +16,7 @@ func registerRouter(core *gin.Engine)  {
 		subjectApi.DELETE("/:id",SubjectDelController)
 		subjectApi.PUT("/:id",SubjectUpdateController)
 		subjectApi.GET("/:id",middleware.Test3(),SubjectGetController)
-		subjectApi.DELETE("/list/all",SubjectListController)
+		subjectApi.GET("/list/all",SubjectListController)
 
 		subjectInnerApi := subjectApi.Group("/info")
 		{

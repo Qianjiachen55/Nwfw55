@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/Qianjiachen55/Nwfw55/framework/gin"
+	"github.com/Qianjiachen55/Nwfw55/provider/demo"
 	"log"
 	"net/http"
 	"os"
@@ -14,7 +15,11 @@ import (
 
 func main()  {
 	fmt.Println("begin!!")
+
 	core := gin.New()
+
+	core.Bind(&demo.DemoServiceProvider{})
+
 	core.Use(
 		gin.Recovery(),
 		)

@@ -6,6 +6,7 @@ package gin
 
 import (
 	"fmt"
+	"github.com/Qianjiachen55/Nwfw55/framework"
 	"html/template"
 	"net"
 	"net/http"
@@ -55,6 +56,11 @@ type RoutesInfo []RouteInfo
 // Engine is the framework's instance, it contains the muxer, middleware and configuration settings.
 // Create an instance of Engine, by using New() or Default()
 type Engine struct {
+
+	//container --nwfw
+	container framework.Container
+
+
 	RouterGroup
 
 	// Enables automatic redirection if the current route can't be matched but a
@@ -168,6 +174,9 @@ func New() *Engine {
 		trees:                  make(methodTrees, 0, 9),
 		delims:                 render.Delims{Left: "{{", Right: "}}"},
 		secureJSONPrefix:       "while(1);",
+
+		container: framework.NewNwfwContainer(),
+
 	}
 	engine.RouterGroup.engine = engine
 	engine.pool.New = func() interface{} {
@@ -186,7 +195,8 @@ func Default() *Engine {
 
 func (engine *Engine) allocateContext() *Context {
 	v := make(Params, 0, engine.maxParams)
-	return &Context{engine: engine, params: &v}
+
+	return &Context{engine: engine, params: &v,container :engine.container}
 }
 
 // Delims sets template left and right delims and returns a Engine instance.
