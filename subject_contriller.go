@@ -1,8 +1,8 @@
 package main
 
 import (
+	demo2 "github.com/Qianjiachen55/Nwfw55/app/provider/demo"
 	"github.com/Qianjiachen55/Nwfw55/framework/gin"
-	"github.com/Qianjiachen55/Nwfw55/provider/demo"
 )
 
 func SubjectAddController(c *gin.Context) {
@@ -11,7 +11,7 @@ func SubjectAddController(c *gin.Context) {
 
 
 func SubjectListController(c *gin.Context) {
-	demoService := c.MustMake(demo.Key).(demo.Service)
+	demoService := c.MustMake(demo2.Key).(demo2.Service)
 
 	foo := demoService.GetFoo()
 

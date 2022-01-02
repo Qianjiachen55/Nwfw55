@@ -9,7 +9,7 @@ type NwfwAppProvider struct {
 	BaseFolder string
 }
 
-func (n *NwfwAppProvider) Rigister(container framework.Container) framework.NewInstance{
+func (n *NwfwAppProvider) Register(container framework.Container) framework.NewInstance{
 	return NewNwfwApp
 }
 

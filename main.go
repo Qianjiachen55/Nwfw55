@@ -1,54 +1,25 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"github.com/Qianjiachen55/Nwfw55/framework/gin"
-	"github.com/Qianjiachen55/Nwfw55/provider/demo"
-	"log"
-	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
+	"github.com/Qianjiachen55/Nwfw55/app/console"
+	"github.com/Qianjiachen55/Nwfw55/app/http"
+	"github.com/Qianjiachen55/Nwfw55/framework"
+	"github.com/Qianjiachen55/Nwfw55/framework/provider/app"
+	"github.com/Qianjiachen55/Nwfw55/framework/provider/kernel"
 )
 
 func main()  {
 	fmt.Println("begin!!")
 
-	core := gin.New()
+	container := framework.NewNwfwContainer()
+	n := app.NwfwAppProvider{}
+	container.Bind(&n)
 
-	core.Bind(&demo.DemoServiceProvider{})
-
-	core.Use(
-		gin.Recovery(),
-		)
-
-
-	registerRouter(core)
-
-	server := &http.Server{
-		Addr:              ":8888",
-		Handler:          	core,
+	if engine, err := http.NewHttpEngine(); err != nil{
+		container.Bind(&kernel.NwfwKernelProvider{HttpEngine: engine})
 	}
 
-	go func() {
-		server.ListenAndServe()
-	}()
-
-	quit := make(chan os.Signal)
-
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM,syscall.SIGQUIT)
-
-	<- quit
-
-	timeoutCtx,cancel := context.WithTimeout(context.Background(), 5*time.Second)
-
-	defer cancel()
-
-	if err := server.Shutdown(timeoutCtx);err != nil{
-		log.Fatal("Server Shutdown:", err)
-	}
-
+	console.RunCommand(container)
 
 }

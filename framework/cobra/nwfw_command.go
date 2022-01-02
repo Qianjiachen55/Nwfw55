@@ -1,6 +1,6 @@
 package cobra
 
-import "github.com/gohade/hade/framework"
+import "github.com/Qianjiachen55/Nwfw55/framework"
 
 // SetContainer 设置服务容器
 func (c *Command) SetContainer(container framework.Container) {

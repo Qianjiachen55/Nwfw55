@@ -6,7 +6,6 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.1
 	github.com/gin-contrib/sse v0.1.0
 	github.com/go-playground/validator/v10 v10.4.1
-	github.com/gohade/hade v1.0.2
 	github.com/golang/protobuf v1.5.2
 	github.com/inconshreveable/mousetrap v1.0.0
 	github.com/json-iterator/go v1.1.12
