@@ -16,7 +16,7 @@ func main()  {
 	n := app.NwfwAppProvider{}
 	container.Bind(&n)
 
-	if engine, err := http.NewHttpEngine(); err != nil{
+	if engine, err := http.NewHttpEngine(); err == nil{
 		container.Bind(&kernel.NwfwKernelProvider{HttpEngine: engine})
 	}
 

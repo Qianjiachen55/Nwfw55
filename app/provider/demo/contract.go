@@ -1,6 +1,6 @@
 package demo
 
-const DemoKey = "nwfw:demo"
+const DemoKey = "demo"
 
 type IService interface {
 	GetAllStudent() []Student
