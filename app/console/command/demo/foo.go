@@ -17,8 +17,8 @@ var FooCommand = &cobra.Command{
 	Aliases: []string{"fo", "f"},
 	Example: "foo example",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		container := cmd.GetContainer()
-		log.Println(container)
+		//container := cmd.GetContainer()
+		log.Println("execute foo command")
 		return nil
 	},
 }

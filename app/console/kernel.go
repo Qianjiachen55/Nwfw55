@@ -32,7 +32,7 @@ func AddAppCommand(rootCmd *cobra.Command)  {
 
 	rootCmd.AddCommand(demo.InitFoo())
 
-	rootCmd.AddCronCommand("* * * * *",demo.InitFoo())
+	rootCmd.AddCronCommand("* * * * * *",demo.FooCommand)
 
 
 }

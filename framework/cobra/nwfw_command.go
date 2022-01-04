@@ -26,8 +26,8 @@ type CommandSpec struct {
 func (c *Command) AddCronCommand(spec string, cmd *Command, args ...string) {
 	root := c.Root()
 	if root.Cron == nil {
-		//root.Cron = cron.New(cron.WithParser(cron.NewParser(cron.SecondOptional | cron.Minute | cron.Hour | cron.Dom | cron.Month | cron.Dow | cron.Descriptor)))
-		root.Cron = cron.New()
+		root.Cron = cron.New(cron.WithParser(cron.NewParser(cron.SecondOptional | cron.Minute | cron.Hour | cron.Dom | cron.Month | cron.Dow | cron.Descriptor)))
+		//root.Cron = cron.New()
 		root.CronSpecs = []CommandSpec{}
 
 	}
