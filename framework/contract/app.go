@@ -4,6 +4,8 @@ const AppKey = "Nwfw:app"
 
 type App interface {
 
+	AppID() string
+
 	Version() string
 
 	BaseFolder() string

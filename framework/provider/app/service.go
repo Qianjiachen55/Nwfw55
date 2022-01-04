@@ -10,6 +10,8 @@ import (
 type NwfwApp struct {
 	container  framework.Container //服务容器
 	baseFolder string              // 基础路径
+	appId	string //用于分布式服务
+
 }
 
 
@@ -85,4 +87,8 @@ func NewNwfwApp(params ...interface{}) (interface{},error) {
 		container:  container,
 		baseFolder: baseFolder,
 	},nil
+}
+
+func (n NwfwApp) AppId() string {
+	return n.appId
 }
