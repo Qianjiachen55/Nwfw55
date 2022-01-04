@@ -50,7 +50,8 @@ func (c *Command) AddDistributedCronCommand(serviceName string,spec string,cmd *
 		if selectedAppID != appID{
 			return
 		}
-
+		//fmt.Println(appID+"get")
+		//fmt.Println(selectedAppID+"get lock")
 		err = cronCmd.ExecuteContext(ctx)
 		if err != nil{
 			log.Println(err)

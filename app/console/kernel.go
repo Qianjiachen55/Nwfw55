@@ -5,6 +5,7 @@ import (
 	"github.com/Qianjiachen55/Nwfw55/framework"
 	"github.com/Qianjiachen55/Nwfw55/framework/cobra"
 	"github.com/Qianjiachen55/Nwfw55/framework/command"
+	"time"
 )
 
 func RunCommand(container framework.Container) error {
@@ -32,7 +33,8 @@ func AddAppCommand(rootCmd *cobra.Command)  {
 
 	rootCmd.AddCommand(demo.InitFoo())
 
-	rootCmd.AddCronCommand("* * * * * *",demo.FooCommand)
+	//rootCmd.AddCronCommand("* * * * * *",demo.FooCommand)
+	rootCmd.AddDistributedCronCommand("foo_fun_for_test","*/5 * * * * *",demo.FooCommand,2*time.Second)
 
 
 }

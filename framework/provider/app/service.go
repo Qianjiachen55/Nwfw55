@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/Qianjiachen55/Nwfw55/framework"
 	"github.com/Qianjiachen55/Nwfw55/framework/util"
+	"github.com/google/uuid"
 	"path/filepath"
 )
 
@@ -82,8 +83,10 @@ func NewNwfwApp(params ...interface{}) (interface{},error) {
 	//	flag.StringVar(&baseFolder,"base_folder","","base_folder参数，默认为当前路径")
 	//	flag.Parse()
 	//}
+	appId :=uuid.New().String()
 
 	return &NwfwApp{
+		appId: appId,
 		container:  container,
 		baseFolder: baseFolder,
 	},nil

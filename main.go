@@ -5,6 +5,7 @@ import (
 	"github.com/Qianjiachen55/Nwfw55/app/http"
 	"github.com/Qianjiachen55/Nwfw55/framework"
 	"github.com/Qianjiachen55/Nwfw55/framework/provider/app"
+	"github.com/Qianjiachen55/Nwfw55/framework/provider/distributed"
 	"github.com/Qianjiachen55/Nwfw55/framework/provider/kernel"
 )
 
@@ -12,8 +13,10 @@ func main()  {
 	//fmt.Println("begin!!")
 
 	container := framework.NewNwfwContainer()
-	n := app.NwfwAppProvider{}
-	container.Bind(&n)
+
+	container.Bind(&app.NwfwAppProvider{})
+
+	container.Bind(&distributed.LocalDistributedProvider{})
 
 	if engine, err := http.NewHttpEngine(); err == nil{
 		container.Bind(&kernel.NwfwKernelProvider{HttpEngine: engine})
