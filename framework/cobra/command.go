@@ -40,7 +40,7 @@ type Command struct {
 
 	Cron *cron.Cron
 
-	CronSpecs []CommandSpec // 保存cron 相关信息
+	CronSpecs []CronSpec // 保存cron 相关信息
 
 	// 服务容器
 	container framework.Container

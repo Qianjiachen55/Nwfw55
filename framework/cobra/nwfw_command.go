@@ -16,10 +16,11 @@ func (c *Command) GetContainer() framework.Container {
 	return c.Root().container
 }
 
-type CommandSpec struct {
+type CronSpec struct {
+	Type string
 	Cmd  *Command
-	Args []string
 	Spec string
+	ServiceName string
 }
 
 
@@ -28,13 +29,13 @@ func (c *Command) AddCronCommand(spec string, cmd *Command, args ...string) {
 	if root.Cron == nil {
 		root.Cron = cron.New(cron.WithParser(cron.NewParser(cron.SecondOptional | cron.Minute | cron.Hour | cron.Dom | cron.Month | cron.Dow | cron.Descriptor)))
 		//root.Cron = cron.New()
-		root.CronSpecs = []CommandSpec{}
+		root.CronSpecs = []CronSpec{}
 
 	}
-	root.CronSpecs = append(root.CronSpecs, CommandSpec{
+	root.CronSpecs = append(root.CronSpecs, CronSpec{
 		Cmd:  cmd,
 		Spec: spec,
-		Args: args,
+		Type: "normal-cron",
 	})
 
 	root.Cron.AddFunc(spec, func() {
