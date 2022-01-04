@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/Qianjiachen55/Nwfw55/app/console"
 	"github.com/Qianjiachen55/Nwfw55/app/http"
 	"github.com/Qianjiachen55/Nwfw55/framework"
@@ -10,7 +9,7 @@ import (
 )
 
 func main()  {
-	fmt.Println("begin!!")
+	//fmt.Println("begin!!")
 
 	container := framework.NewNwfwContainer()
 	n := app.NwfwAppProvider{}

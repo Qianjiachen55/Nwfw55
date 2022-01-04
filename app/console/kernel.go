@@ -3,8 +3,8 @@ package console
 import (
 	"github.com/Qianjiachen55/Nwfw55/app/console/command/demo"
 	"github.com/Qianjiachen55/Nwfw55/framework"
-	"github.com/Qianjiachen55/Nwfw55/framework/command"
 	"github.com/Qianjiachen55/Nwfw55/framework/cobra"
+	"github.com/Qianjiachen55/Nwfw55/framework/command"
 )
 
 func RunCommand(container framework.Container) error {
@@ -31,4 +31,8 @@ func RunCommand(container framework.Container) error {
 func AddAppCommand(rootCmd *cobra.Command)  {
 
 	rootCmd.AddCommand(demo.InitFoo())
+
+	rootCmd.AddCronCommand("* * * * *",demo.InitFoo())
+
+
 }

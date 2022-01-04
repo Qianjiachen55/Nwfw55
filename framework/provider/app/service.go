@@ -2,7 +2,6 @@ package app
 
 import (
 	"errors"
-	"flag"
 	"github.com/Qianjiachen55/Nwfw55/framework"
 	"github.com/Qianjiachen55/Nwfw55/framework/util"
 	"path/filepath"
@@ -13,6 +12,9 @@ type NwfwApp struct {
 	baseFolder string              // 基础路径
 }
 
+
+
+
 func (n NwfwApp) Version() string {
 	return "2022-01-01"
 }
@@ -21,14 +23,13 @@ func (n NwfwApp) BaseFolder() string {
 	if n.baseFolder != "" {
 		return n.baseFolder
 	}
-	var baseFolder string
-	flag.StringVar(&baseFolder, "base_folder", "", "base_folder 参数，默认为当前路径")
-	flag.Parse()
-	if baseFolder != "" {
-		return baseFolder
-	}
 
 	return util.GetExecDirectory()
+}
+
+
+func (n NwfwApp) ConfigFolder() string {
+	return filepath.Join(n.BaseFolder(),"config")
 }
 
 func (n NwfwApp) StorageFolder() string {
@@ -74,6 +75,11 @@ func NewNwfwApp(params ...interface{}) (interface{},error) {
 
 	container := params[0].(framework.Container)
 	baseFolder := params[1].(string)
+
+	//if baseFolder ==""{
+	//	flag.StringVar(&baseFolder,"base_folder","","base_folder参数，默认为当前路径")
+	//	flag.Parse()
+	//}
 
 	return &NwfwApp{
 		container:  container,

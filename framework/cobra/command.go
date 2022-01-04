@@ -20,14 +20,13 @@ import (
 	"context"
 	"fmt"
 	"github.com/Qianjiachen55/Nwfw55/framework"
+	"github.com/robfig/cron/v3"
+	flag "github.com/spf13/pflag"
 	"io"
-
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
-
-	flag "github.com/spf13/pflag"
 )
 
 // FParseErrWhitelist configures Flag parse errors to be ignored
@@ -38,8 +37,14 @@ type FParseErrWhitelist flag.ParseErrorsWhitelist
 // you to define the usage and description as part of your command
 // definition to ensure usability.
 type Command struct {
+
+	Cron *cron.Cron
+
+	CronSpecs []CommandSpec // 保存cron 相关信息
+
 	// 服务容器
 	container framework.Container
+
 	// Use is the one-line usage message.
 	// Recommended syntax is as follow:
 	//   [ ] identifies an optional argument. Arguments that are not enclosed in brackets are required.
