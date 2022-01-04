@@ -89,6 +89,6 @@ func NewNwfwApp(params ...interface{}) (interface{},error) {
 	},nil
 }
 
-func (n NwfwApp) AppId() string {
+func (n NwfwApp) AppID() string {
 	return n.appId
 }
