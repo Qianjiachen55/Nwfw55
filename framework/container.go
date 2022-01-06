@@ -49,11 +49,11 @@ func (nwfw *NwfwContainer) PrintProviders() []string {
 
 func (nwfw *NwfwContainer) Bind(provider ServiceProvider) error {
 	nwfw.lock.Lock()
-	defer nwfw.lock.Unlock()
+	//defer nwfw.lock.Unlock()
 
 	key := provider.Name()
 	nwfw.providers[key] = provider
-
+	nwfw.lock.Unlock()
 	if provider.IsDefer() == false {
 		if err := provider.Boot(nwfw); err != nil {
 			return err
